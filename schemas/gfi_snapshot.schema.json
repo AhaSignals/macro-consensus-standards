@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "gfi_snapshot",
+  "type": "object",
+  "required": ["snapshot_id", "generated_at", "gfi"],
+  "properties": {
+    "snapshot_id": { "type": "string" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "gfi": {
+      "type": "object",
+      "required": ["composite", "signal", "components"],
+      "properties": {
+        "composite": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "signal": { "enum": ["LOW", "MODERATE", "ELEVATED", "CRITICAL"] },
+        "components": {
+          "type": "object",
+          "properties": {
+            "dispersion": { "type": "object", "required": ["score", "weight"] },
+            "momentum": { "type": "object", "required": ["score", "weight"] },
+            "cot": { "type": "object", "required": ["score", "weight"] }
+          }
+        }
+      }
+    }
+  }
+}
