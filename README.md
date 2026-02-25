@@ -1,62 +1,53 @@
-# 🏛️ AhaSignals: Macro Consensus Logic & Fragility Framework
+# Open Standard for Macro Consensus Divergence Analysis
 
-[![Methodology: AFI v1.0](https://img.shields.io/badge/Methodology-AFI_v1.0-blue.svg)](https://ahasignals.com)
-[![Market: Global Macro](https://img.shields.io/badge/Market-Global_Macro-gold.svg)](https://ahasignals.com)
+This repository contains the open-source methodology, JSON schemas, and reference implementations for the consensus divergence indices used by [AhaSignals.com](https://ahasignals.com).
 
-> **"The most dangerous market state is not high volatility, but a fragile consensus."**
+We believe financial transparency is paramount. By open-sourcing our scoring logic, we allow institutional researchers and quantitative analysts to verify the integrity of our fragility signals.
 
-This repository documents the quantitative logic, data protocols, and methodology behind the **AhaSignals Fragility Index (AFI)**. We bridge the gap between institutional "Wall Street" targets and live "Prediction Market" reality.
+## 📊 Methodology & Live Trackers
 
----
+### 1. Gold Fragility Index (GFI)
+The GFI quantifies the risk of a consensus reversal in the gold market by synthesizing analyst dispersion, momentum, and positioning.
+- **Methodology:** [Read the math](./methodology/gold-fragility-index.md)
+- **Live Data:** [View Gold Forecast Tracker](https://ahasignals.com/gold-forecast-tracker/) 🟢 *(Deep Link)*
 
-## 🔍 Overview
-AhaSignals specializes in **Consensus Divergence Analysis**. We monitor where the world's most influential analysts and the market's real-time capital flows disagree. When this "gap" widens, fragility increases—creating the "Aha!" moments of market reversals.
+### 2. Silver Structural Tension Index (SSTI)
+Measures the identity crisis between silver's industrial and monetary roles.
+- **Methodology:** [Read the math](./methodology/silver-structural-tension.md)
+- **Live Data:** [View Silver Forecast Tracker](https://ahasignals.com/silver-forecast-tracker/) 🟢
 
-### Core Assets Tracked:
-* **USD Index (DXY):** Implied DXY calculation based on G10 currency weighting divergence.
-* **Fed Rate (FRFI):** FOMC Dot Plot dispersion vs. Fed Funds Futures pricing.
-* **U.S. Treasury:** Yield curve consensus vs. MOVE Index volatility Z-scores.
-* **Bitcoin (BTC):** Institutional ETF AUM flows vs. Short-Term Holder Realized Price (STH-RP).
-* **Gold/Silver:** LBMA survey consensus vs. Real Yield (TIPS) correlation gaps.
+### 3. Fed Rate Fragility Index (FRFI)
+Tracks the divergence between CME FedWatch futures and prediction markets (Kalshi/Polymarket).
+- **Methodology:** [Read the math](./methodology/fed-rate-fragility.md)
+- **Live Data:** [View Fed Rate Fragility Index](https://ahasignals.com/fed-rate-fragility-index/) 🟢
 
----
+### 4. US Dollar Index Forecast (DCDI)
+Tracks the divergence between Wall Street currency forecasts and real-time interest rate differentials.
 
-## 📈 Methodology: The AFI Protocol
-The **AhaSignals Fragility Index (AFI)** is a composite score (0-100) derived from three pillars of divergence:
+- **Methodology: See Implied DXY calculation
+- **Live Data: View DXY Forecast Tracker 🟢
+Core signal: Measures the gap between EUR/USD analyst targets and the US-German yield spread.
 
-1.  **Institutional Dispersion:** The standard deviation of year-end targets from top-tier investment banks (GS, JPM, MS, etc.).
-2.  **Market Realism Gap:** The delta between the "Consensus Mean" and live spot/futures pricing.
-3.  **Sentiment Skew:** Measuring "Crowded Trades" via CFTC Commitment of Traders (COT) and Prediction Market volumes.
+### 5. S&P 500 Concentration Risk (ACRI)
+Quantifies the crowding risk of the "Magnificent 7" stocks versus the broader market.
 
+- **Methodology: Read concentration metrics
+- **Live Data: View S&P 500 Concentration Risk 🟢
+Core signal: Tracks Top 10 weighting vs historical means and earnings contribution gaps.
 
----
+### 6. US Treasury Yield Fragility (BMFI)
+Monitoring stress in the bond market through survey divergence and positioning crowding.
 
-## 🛠️ Implementation Logic (Public Documentation)
+- **Methodology: Bond market fragility logic
+- **Live Data: View 10Y Treasury Yield Tracker 🟢
+- **Core signal: Combines SPF forecast errors with CFTC hedge fund net-short positioning extremes.
 
-### DXY Implied Calculation
-We derive the **Aha Implied DXY** using the following geometric weighting protocol:
-$$DXY_{Implied} = 50.14348112 \times EURUSD^{-0.576} \times USDJPY^{0.136} \times GBPUSD^{-0.119} \dots$$
-*This allows us to detect when the DXY is being driven by a single-currency anomaly rather than broad dollar strength.*
+### 7. Bitcoin Prediction Gap (BSPG)
+Measuring the sentiment disconnect between institutional ETF flows and retail prediction markets.
 
-### Bitcoin On-Chain Integration
-We utilize **Realized Price** data as the psychological floor for consensus. 
-* **Provider:** Glassnode / Institutional Flow Data.
-* **Logic:** When $Price_{Spot}$ approaches $Price_{STH-RP}$ while ETF flows remain negative, the Fragility Index triggers a "Exhaustion" signal.
+- **Methodology: Bitcoin sentiment analysis
+- **Live Data: View Bitcoin Prediction Tracker 🟢
+Core signal: Detects when ETF inflows (Smart Money) diverge from Polymarket odds (Speculative Sentiment).
 
----
-
-## 📡 Data Integrity & Sources
-To ensure institutional-grade accuracy, AhaSignals aggregates data from:
-* **Official Sources:** Federal Reserve Board, CFTC, LBMA.
-* **On-chain Providers:** Glassnode, Farside Investors.
-* **Institutional Research:** Aggregated via Bloomberg/Reuters terminal verification.
-
----
-
-## ⚖️ License & Usage
-The methodology documented here is open for academic and research purposes. For commercial API access or raw data feeds, please visit [ahasignals.com](https://ahasignals.com).
-
-**Disclaimer:** *AhaSignals provides research and quantitative tools only. No content in this repository constitutes financial advice.*
-
----
-Copyright © 2026 AhaSignals Research. All rights reserved.
+## 🛠️ Data Schemas
+To ensure data integrity, all snapshots adhere to strict [JSON Schemas](./schemas/).
